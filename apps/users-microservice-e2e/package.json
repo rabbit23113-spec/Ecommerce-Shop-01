@@ -1,0 +1,26 @@
+{
+  "name": "@server/users-microservice-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@server/users-microservice"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/users-microservice-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@server/users-microservice:build",
+          "@server/users-microservice:serve"
+        ]
+      }
+    }
+  }
+}
