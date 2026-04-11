@@ -26,6 +26,16 @@ services:
       - ./apps/users-microservice/.env
     depends_on:
       - users-database
+    
+  auth-microservice:
+    build:
+      context: .
+      dockerfile: ./apps/auth-microservice/Dockerfile
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./apps/auth-microservice/.env
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq

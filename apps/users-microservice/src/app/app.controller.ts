@@ -5,6 +5,7 @@ import { UserEntity } from './entities/user.entity';
 import { CreateUserDto } from './dto/user-create.dto';
 import { UserValidateCredentialsDto } from './dto/user-validate-credentials.dto';
 import { UpdateUserDto } from './dto/user-update.dto';
+import { UserWithTokensDto } from './dto/user-with-tokens.dto';
 
 @Controller()
 export class AppController {
@@ -24,7 +25,7 @@ export class AppController {
   @MessagePattern('users-create-one')
   async createOne(
     @Payload() data: { dto: CreateUserDto },
-  ): Promise<UserEntity> {
+  ): Promise<UserWithTokensDto> {
     const { dto } = data;
     return await this.appService.createOne(dto);
   }
@@ -32,7 +33,7 @@ export class AppController {
   @MessagePattern('users-validate-credentials')
   async validateCredentials(
     @Payload() data: { dto: UserValidateCredentialsDto },
-  ): Promise<UserEntity> {
+  ): Promise<UserWithTokensDto> {
     const { dto } = data;
     return await this.appService.validateCredentials(dto);
   }

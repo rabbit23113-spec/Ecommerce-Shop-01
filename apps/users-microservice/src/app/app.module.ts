@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -18,6 +19,19 @@ import { UserEntity } from './entities/user.entity';
       autoLoadEntities: true,
     }),
     TypeOrmModule.forFeature([UserEntity]),
+    ClientsModule.register([
+      {
+        name: String(process.env.RABBITMQ_AUTH_CLIENT),
+        transport: Transport.RMQ,
+        options: {
+          urls: [String(process.env.RABBITMQ_URL)],
+          queue: process.env.RABBITMQ_AUTH_QUEUE,
+          queueOptions: {
+            durable: true,
+          },
+        },
+      },
+    ]),
   ],
   controllers: [AppController],
   providers: [AppService],
