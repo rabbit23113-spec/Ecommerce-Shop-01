@@ -11,9 +11,6 @@ export class AppService {
     @InjectRepository(BrandEntity)
     private readonly brandRepository: Repository<BrandEntity>,
   ) {}
-  getData(): { message: string } {
-    return { message: 'Hello API' };
-  }
 
   async findAll(): Promise<BrandEntity[]> {
     return await this.brandRepository.find();

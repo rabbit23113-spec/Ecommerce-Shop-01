@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 import { BrandEntity } from './entities/brand.entity';
@@ -8,11 +8,6 @@ import { UpdateBrandDto } from './dto/update-brand.dto';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getData() {
-    return this.appService.getData();
-  }
 
   @MessagePattern('brand-find-all')
   async findAll(): Promise<BrandEntity[]> {
