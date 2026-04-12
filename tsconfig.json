@@ -26,6 +26,24 @@
     },
     {
       "path": "./apps/cart-microservice"
+    },
+    {
+      "path": "./apps/brand-microservice-e2e"
+    },
+    {
+      "path": "./apps/brand-microservice"
+    },
+    {
+      "path": "./apps/category-microservice-e2e"
+    },
+    {
+      "path": "./apps/category-microservice"
+    },
+    {
+      "path": "./apps/product-microservice-e2e"
+    },
+    {
+      "path": "./apps/product-microservice"
     }
   ]
 }
