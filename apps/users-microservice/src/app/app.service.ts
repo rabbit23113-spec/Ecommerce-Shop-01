@@ -23,6 +23,8 @@ export class AppService {
     private readonly userRepository: Repository<UserEntity>,
     @Inject(process.env.RABBITMQ_AUTH_CLIENT)
     private readonly authClient: ClientProxy,
+    @Inject(process.env.RABBITMQ_CART_CLIENT)
+    private readonly cartClient: ClientProxy,
   ) {}
   async findAll(): Promise<UserEntity[]> {
     return await this.userRepository.find();
@@ -44,7 +46,9 @@ export class AppService {
       password: hash,
     });
     await this.userRepository.save(user);
-    const tokens: UserTokensDto = await firstValueFrom(this.authClient.send('auth-generate-tokens', { dto: { id: user.id } }));
+    const tokens: UserTokensDto = await firstValueFrom(
+      this.authClient.send('auth-generate-tokens', { dto: { id: user.id } }),
+    );
     const response: UserWithTokensDto = { user, tokens };
     return response;
   }
@@ -60,7 +64,11 @@ export class AppService {
     const isMatch: boolean = await bcrypt.compare(password, candidate.password);
     if (!isMatch)
       throw new UnauthorizedException({ message: 'Invalid email or password' });
-    const tokens: UserTokensDto = await firstValueFrom(this.authClient.send('auth-generate-tokens', { dto: {id: candidate.id } }));
+    const tokens: UserTokensDto = await firstValueFrom(
+      this.authClient.send('auth-generate-tokens', {
+        dto: { id: candidate.id },
+      }),
+    );
     const response: UserWithTokensDto = { user: candidate, tokens };
     return response;
   }

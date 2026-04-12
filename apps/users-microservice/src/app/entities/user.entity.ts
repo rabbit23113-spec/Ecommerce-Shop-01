@@ -41,7 +41,7 @@ export class UserEntity {
     city: string;
   };
 
-  @Column({ type: 'simple-array', default: [] })
+  @Column({ type: 'simple-array', name: 'order_ids', default: [] })
   orderIds: string[];
 
   @Column({ type: 'enum', default: UserRole.USER, enum: UserRole })

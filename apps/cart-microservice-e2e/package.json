@@ -1,0 +1,26 @@
+{
+  "name": "@server/cart-microservice-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@server/cart-microservice"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/cart-microservice-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@server/cart-microservice:build",
+          "@server/cart-microservice:serve"
+        ]
+      }
+    }
+  }
+}

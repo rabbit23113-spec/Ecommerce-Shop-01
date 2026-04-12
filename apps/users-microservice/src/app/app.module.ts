@@ -31,6 +31,17 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           },
         },
       },
+      {
+        name: String(process.env.RABBITMQ_CART_CLIENT),
+        transport: Transport.RMQ,
+        options: {
+          urls: [String(process.env.RABBITMQ_URL)],
+          queue: process.env.RABBITMQ_CART_QUEUE,
+          queueOptions: {
+            durable: true,
+          },
+        },
+      },
     ]),
   ],
   controllers: [AppController],
