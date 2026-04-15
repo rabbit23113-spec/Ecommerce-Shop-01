@@ -44,6 +44,18 @@
     },
     {
       "path": "./apps/product-microservice"
+    },
+    {
+      "path": "./apps/orders-microservice-e2e"
+    },
+    {
+      "path": "./apps/orders-microservice"
+    },
+    {
+      "path": "./apps/payments-microservice-e2e"
+    },
+    {
+      "path": "./apps/payments-microservice"
     }
   ]
 }

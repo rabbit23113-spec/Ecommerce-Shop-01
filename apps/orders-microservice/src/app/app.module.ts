@@ -1,42 +1,44 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductEntity } from './entities/product.entity';
+import { OrderEntity } from './entities/order.entity';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      username: process.env.PRODUCTS_DATABASE_USERNAME,
-      password: process.env.PRODUCTS_DATABASE_PASSWORD,
-      database: process.env.PRODUCTS_DATABASE_NAME,
-      host: process.env.PRODUCTS_DATABASE_HOST,
-      port: Number(process.env.PRODUCTS_DATABASE_PORT),
-      entities: [ProductEntity],
+      username: process.env.ORDERS_DATABASE_USERNAME,
+      password: process.env.ORDERS_DATABASE_PASSWORD,
+      database: process.env.ORDERS_DATABASE_NAME,
+      host: process.env.ORDERS_DATABASE_HOST,
+      port: Number(process.env.ORDERS_DATABASE_PORT),
+      entities: [OrderEntity],
       synchronize: true,
       autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([ProductEntity]),
+    TypeOrmModule.forFeature([OrderEntity]),
     ClientsModule.register([
       {
-        name: String(process.env.RABBITMQ_CATEGORY_CLIENT),
+        name: String(process.env.RABBITMQ_USERS_CLIENT),
         transport: Transport.RMQ,
         options: {
           urls: [String(process.env.RABBITMQ_URL)],
-          queue: process.env.RABBITMQ_CATEGORY_QUEUE,
+          queue: process.env.RABBITMQ_USERS_QUEUE,
           queueOptions: {
             durable: true,
           },
         },
       },
+    ]),
+    ClientsModule.register([
       {
-        name: String(process.env.RABBITMQ_BRAND_CLIENT),
+        name: String(process.env.RABBITMQ_PAYMENTS_CLIENT),
         transport: Transport.RMQ,
         options: {
           urls: [String(process.env.RABBITMQ_URL)],
-          queue: process.env.RABBITMQ_BRAND_QUEUE,
+          queue: process.env.RABBITMQ_PAYMENTS_QUEUE,
           queueOptions: {
             durable: true,
           },
