@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 import { ProductEntity } from './entities/product.entity';
@@ -37,7 +37,7 @@ export class AppController {
   }
 
   @MessagePattern('products-create-one')
-  async creteOne(
+  async createOne(
     @Payload() data: { dto: CreateProductDto },
   ): Promise<ProductEntity> {
     const { dto } = data;
