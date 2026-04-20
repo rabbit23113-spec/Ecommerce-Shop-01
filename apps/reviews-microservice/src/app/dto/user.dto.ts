@@ -1,0 +1,16 @@
+export class UserDto {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  address: {
+    country: string;
+    city: string;
+  };
+  orders: [];
+  roles: string[];
+  reviews: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}

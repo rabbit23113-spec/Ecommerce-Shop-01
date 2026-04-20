@@ -44,6 +44,9 @@ export class UserEntity {
   @Column({ type: 'simple-array', name: 'order_ids', default: [] })
   orderIds: string[];
 
+  @Column({ type: 'simple-array', name: 'review_ids', default: [] })
+  reviewIds: string[];
+
   @Column({ type: 'enum', default: UserRole.USER, enum: UserRole })
   role: UserRole;
 

@@ -56,6 +56,12 @@
     },
     {
       "path": "./apps/payments-microservice"
+    },
+    {
+      "path": "./apps/reviews-microservice-e2e"
+    },
+    {
+      "path": "./apps/reviews-microservice"
     }
   ]
 }
