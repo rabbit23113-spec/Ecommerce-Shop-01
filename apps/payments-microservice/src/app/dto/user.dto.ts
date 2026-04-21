@@ -8,8 +8,9 @@ export class UserDto {
     country: string;
     city: string;
   };
-  orders: [];
-  roles: string[];
+  orderIds: string[];
+  reviewIds: string[];
+  role: UserRole;
   createdAt: Date;
   updatedAt: Date;
 }

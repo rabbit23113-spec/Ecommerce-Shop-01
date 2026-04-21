@@ -51,6 +51,15 @@ export class AppService {
     if (!product)
       throw new NotFoundException({ message: 'The product is not existing' });
     const review: ReviewEntity = await this.reviewsRepository.create(dto);
+    const updatedUserReviewIds: string[] = [...user.reviewIds, review.id];
+    await this.usersClient.emit('users-update-one', {
+      reviewIds: updatedUserReviewIds,
+    });
+    const updatedProductReviewIds: string[] = [...user.reviewIds, review.id];
+    await this.productsClient.emit('products-update-one', {
+      reviewIds: updatedProductReviewIds,
+    });
+    await this.reviewsRepository.save(review);
     return review;
   }
 

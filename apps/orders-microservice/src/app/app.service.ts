@@ -62,6 +62,8 @@ export class AppService {
     await this.updateOne(order.id, {
       paymentId: payment.id,
     });
+    const updatedUserOrders: string[] = [...user.orderIds, order.id];
+    await this.usersClient.emit('users-update-one', { orderIds: updatedUserOrders })
     return order;
   }
 
