@@ -55,7 +55,7 @@ export class AppService {
     await this.usersClient.emit('users-update-one', {
       reviewIds: updatedUserReviewIds,
     });
-    const updatedProductReviewIds: string[] = [...user.reviewIds, review.id];
+    const updatedProductReviewIds: string[] = [...product.reviewIds, review.id];
     await this.productsClient.emit('products-update-one', {
       reviewIds: updatedProductReviewIds,
     });

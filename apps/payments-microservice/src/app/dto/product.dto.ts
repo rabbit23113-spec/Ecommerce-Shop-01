@@ -3,7 +3,8 @@ export class ProductDto {
   name: string;
   description: string;
   brandId: string;
-  categoryid: string;
+  categoryId: string;
+  reviewIds: string[];
   price: number;
   createdAt: Date;
   updatedAt: Date;

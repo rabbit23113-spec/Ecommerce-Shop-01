@@ -23,6 +23,9 @@ export class ProductEntity {
   @Column({ name: 'category_id' })
   categoryId: string;
 
+  @Column({ name: 'review_ids', type: 'simple-array', default: [] })
+  reviewIds: string[];
+
   @Column({ type: 'float' })
   price: number;
 
