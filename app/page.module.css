@@ -1,0 +1,26 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    min-height: 70vh;
+    gap: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.categories {
+    width: 82vw;
+    display: flex;
+    justify-content: space-around;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
