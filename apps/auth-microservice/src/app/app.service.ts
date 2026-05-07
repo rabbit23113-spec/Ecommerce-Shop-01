@@ -27,12 +27,16 @@ export class AppService {
   }
 
   access(accessToken: string): AuthPayloadDto {
-    const payload: AuthPayloadDto = this.jwtService.verify(accessToken);
+    const payload: AuthPayloadDto = this.jwtService.verify(accessToken, {
+      secret: process.env.SECRET_KEY,
+    });
     if (!payload) throw new UnauthorizedException({ message: 'Invalid token' });
     return payload;
   }
   refresh(refreshToken: string): AuthRefreshDto {
-    const payload: AuthPayloadDto = this.jwtService.verify(refreshToken);
+    const payload: AuthPayloadDto = this.jwtService.verify(refreshToken, {
+      secret: process.env.SECRET_KEY,
+    });
     if (!payload) throw new UnauthorizedException({ message: 'Invalid token' });
     const { sub } = payload;
     const accessToken: string = this.jwtService.sign(

@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ReviewEntity } from './entities/review.entity';
 
 @Module({
   imports: [
@@ -13,11 +14,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       database: process.env.REVIEWS_DATABASE_NAME,
       host: process.env.REVIEWS_DATABASE_HOST,
       port: Number(process.env.REVIEWS_DATABASE_PORT),
-      entities: [],
+      entities: [ReviewEntity],
       synchronize: true,
       autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([]),
+    TypeOrmModule.forFeature([ReviewEntity]),
     ClientsModule.register([
       {
         name: String(process.env.RABBITMQ_PRODUCTS_CLIENT),

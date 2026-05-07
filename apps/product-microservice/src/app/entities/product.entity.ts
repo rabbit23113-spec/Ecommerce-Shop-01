@@ -29,6 +29,9 @@ export class ProductEntity {
   @Column({ type: 'float' })
   price: number;
 
+  @Column({ name: 'image_url' })
+  imageUrl: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

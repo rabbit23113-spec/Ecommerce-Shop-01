@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { BrandService } from './brand.service';
 import { BrandResponseDto } from './dto/brand-response.dto';
 import { CreateBrandDto } from './dto/create-brand.dto';
@@ -14,8 +22,7 @@ export class BrandController {
   }
 
   @Get(':id')
-  async findOne(@Body() body: { id: string }): Promise<BrandResponseDto> {
-    const { id } = body;
+  async findOne(@Param('id') id: string): Promise<BrandResponseDto> {
     return await this.brandService.findOne(id);
   }
 
@@ -25,7 +32,10 @@ export class BrandController {
   }
 
   @Patch('update/:id')
-  async updateOne(@Param('id') id: string, @Body() dto: UpdateBrandDto): Promise<void> {
+  async updateOne(
+    @Param('id') id: string,
+    @Body() dto: UpdateBrandDto,
+  ): Promise<void> {
     return await this.brandService.updateOne(id, dto);
   }
 
